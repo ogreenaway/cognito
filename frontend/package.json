@@ -49,11 +49,11 @@
     ]
   },
   "devDependencies": {
-    "msw": "^2.12.7"
+    "msw": "^1.3.5"
   },
   "jest": {
     "transformIgnorePatterns": [
-      "node_modules/(?!(msw|@mswjs|until-async|@apollo|react-router)/)"
+      "node_modules/(?!(@apollo|react-router)/)"
     ]
   }
 }
