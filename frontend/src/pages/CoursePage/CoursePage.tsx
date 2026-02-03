@@ -8,7 +8,10 @@ import HR from "../../components/HR/HR";
 import Page from "../../components/Page/Page";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import React from "react";
+import Spinner from "react-bootstrap/Spinner";
 import TopicCardGrid from "../../components/TopicCardGrid/TopicCardGrid";
+import { useCourseData } from "../../hooks/useCourseData";
+import { useCourseID } from "../../hooks/useCourseID";
 
 // Static sample data matching the design reference
 const sampleCategories: Category[] = [
@@ -73,11 +76,40 @@ const sampleCategories2: Category[] = [
 ];
 
 function CoursePage() {
+  const courseId = useCourseID();
+  const { course, loading, error } = useCourseData(courseId || "");
+
+  if (loading) {
+    return (
+      <Page>
+        <div className="d-flex justify-content-center align-items-center py-5">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+      </Page>
+    );
+  }
+
+  if (error || !course) {
+    return (
+      <Page>
+        <div className="alert alert-danger" role="alert">
+          Failed to load course data. Please try again later.
+        </div>
+      </Page>
+    );
+  }
+
   return (
     <Page>
-      <Breadcrumbs />
-      <PageTitle />
-      <ExamCode />
+      <Breadcrumbs
+        subject={course.subjectName}
+        examBoard={course.examBoardCode}
+        level={course.levelCode}
+      />
+      <PageTitle name={course.name} />
+      <ExamCode code={course.code} />
       <HR />
       <TopicCardGrid>
         <TopicCard topicName="Organisation" categories={sampleCategories} />

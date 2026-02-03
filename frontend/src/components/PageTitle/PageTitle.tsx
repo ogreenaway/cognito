@@ -1,9 +1,13 @@
 import React from "react";
 
-function PageTitle() {
+interface PageTitleProps {
+  name?: string;
+}
+
+function PageTitle({ name = "AQA GCSE Biology" }: PageTitleProps) {
   return (
     <h1 className="h2 mb-3">
-      <span className="text-secondary">AQA GCSE Biology </span>
+      <span className="text-secondary">{name} </span>
       Revision Notes
     </h1>
   );
