@@ -35,5 +35,5 @@
 ## 6. Cleanup
 
 - [x] 6.1 Remove unused custom CSS from component SCSS files
-- [ ] 6.2 Verify visual consistency matches design screenshots
-- [ ] 6.3 Test responsive behavior at mobile/tablet/desktop breakpoints
+- [x] 6.2 Verify visual consistency matches design screenshots
+- [x] 6.3 Test responsive behavior at mobile/tablet/desktop breakpoints

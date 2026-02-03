@@ -20,7 +20,7 @@ interface TopicCardProps {
 
 const TopicCard: React.FC<TopicCardProps> = ({ topicName, categories }) => {
   return (
-    <div className="bg-body-secondary border rounded">
+    <div className="bg-white border rounded">
       <div className="py-4 px-3 border-bottom">
         <h2 className="h6 mb-0">{topicName}</h2>
       </div>

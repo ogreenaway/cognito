@@ -25,7 +25,7 @@ const CategoryAccordion: React.FC<CategoryAccordionProps> = ({ category }) => {
   };
 
   return (
-    <div className="rounded bg-body mb-3 border">
+    <div className="rounded bg-body-tertiary mb-3 border">
       <button
         className="category-accordion__header btn btn-link w-100 d-flex align-items-center justify-content-between p-3 text-start text-decoration-none"
         onClick={handleToggle}
