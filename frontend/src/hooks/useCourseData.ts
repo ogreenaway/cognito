@@ -39,6 +39,7 @@ const COURSE_QUERY = gql`
   }
 `;
 
+// TODO: move to a separate file in the types directory and rename to Course
 export interface CourseData {
   id: string;
   code: string;

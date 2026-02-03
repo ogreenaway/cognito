@@ -4,6 +4,7 @@ import HomeIcon from "./components/HomeIcon";
 import React from "react";
 import Separator from "./components/Separator";
 
+// TODO: match the API's names for subject, examBoard, and level
 interface BreadcrumbsProps {
   subject?: string;
   examBoard?: string;
@@ -15,9 +16,7 @@ const handleDemoClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
   window.alert("This link won't be implemented in this demo.");
 };
 
-const capitalizeFirst = (str: string) =>
-  str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-
+// TODO: convert to bootstrap
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   subject = "Biology",
   examBoard = "AQA",
@@ -25,7 +24,6 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
 }) => {
   const levelLower = level.toLowerCase();
   const subjectLower = subject.toLowerCase();
-  const subjectDisplay = capitalizeFirst(subject);
 
   return (
     <div className="breadcrumbs mb-4" data-testid="breadcrumbs">
@@ -52,7 +50,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
             href={`/${levelLower}/${subjectLower}/`}
             onClick={handleDemoClick}
           >
-            {subjectDisplay}
+            {subject}
           </a>
           <Separator />
         </span>
