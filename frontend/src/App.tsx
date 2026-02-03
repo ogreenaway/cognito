@@ -1,11 +1,13 @@
 import "./App.scss";
 
+import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
 import React from "react";
 import logo from "./logo.svg";
 
 function App() {
   return (
     <div className="App">
+      <Breadcrumbs />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
