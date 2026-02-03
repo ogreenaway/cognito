@@ -1,0 +1,25 @@
+// Responsive breakpoints
+// Based on design documentation
+
+$breakpoint-mobile-max: 575.98px;
+$breakpoint-tablet-min: 576px;
+$breakpoint-large-min: 992px;
+
+// Mixins for media queries
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile-max) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: $breakpoint-tablet-min) {
+    @content;
+  }
+}
+
+@mixin large-up {
+  @media (min-width: $breakpoint-large-min) {
+    @content;
+  }
+}

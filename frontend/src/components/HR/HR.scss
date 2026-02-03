@@ -1,0 +1,5 @@
+@use "../../constants/colors" as c;
+
+.hr {
+  border-bottom: 1px solid c.$color-border;
+}

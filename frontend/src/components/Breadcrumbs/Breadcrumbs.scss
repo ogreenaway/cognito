@@ -1,9 +1,12 @@
+@use "../../constants/breakpoints" as bp;
+@use "../../constants/colors" as c;
+
 .breadcrumbs {
   position: relative;
   margin-bottom: 1rem;
 
   // Mobile fade gradients
-  @media (max-width: 575.98px) {
+  @include bp.mobile {
     &::before,
     &::after {
       content: "";
@@ -17,13 +20,13 @@
     &::before {
       left: 0;
       transform: translateX(-100%);
-      background: linear-gradient(to right, #fff, transparent);
+      background: linear-gradient(to right, c.$color-background, transparent);
     }
 
     &::after {
       right: 0;
       transform: translateX(100%);
-      background: linear-gradient(to right, transparent, #fff);
+      background: linear-gradient(to right, transparent, c.$color-background);
     }
   }
 
@@ -41,7 +44,7 @@
     }
 
     // Mobile adjustments
-    @media (max-width: 575.98px) {
+    @include bp.mobile {
       margin-inline: -0.75rem;
       padding-inline-start: 0.75rem;
 
@@ -64,31 +67,31 @@
   }
 
   &__parent {
-    color: #6e6e6e;
+    color: c.$color-text-muted;
     font-weight: 700;
     text-decoration: underline;
 
     &:hover {
-      color: #4a4a4a;
+      color: c.$color-text-muted-hover;
     }
   }
 
   &__home {
     display: block;
-    color: #6e6e6e;
+    color: c.$color-text-muted;
 
     &:hover {
-      color: #4a4a4a;
+      color: c.$color-text-muted-hover;
     }
   }
 
   &__spacer {
-    color: #b0b0b0;
+    color: c.$color-spacer;
     margin-inline: 0.5rem;
   }
 
   &__current {
     font-weight: 700;
-    color: #212529;
+    color: c.$color-text-body;
   }
 }

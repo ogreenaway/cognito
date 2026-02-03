@@ -1,0 +1,16 @@
+@use "../../constants/colors" as colours;
+
+.exam-code {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  margin: 0 0 0.75rem 0;
+  border: 1px solid colours.$color-border;
+  border-radius: 0.5rem;
+  background-color: colours.$color-background-subtle;
+  color: colours.$color-text-muted;
+  font-size: 1rem;
+
+  strong {
+    color: colours.$color-text-body;
+  }
+}

@@ -1,0 +1,12 @@
+@use "../../constants/colors" as c;
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: c.$color-text-body;
+  margin: 0 0 0.75rem 0;
+
+  &__muted {
+    color: c.$color-text-muted;
+  }
+}

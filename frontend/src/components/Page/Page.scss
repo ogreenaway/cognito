@@ -1,0 +1,12 @@
+@use "../../constants/breakpoints" as bp;
+
+.page {
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding: 3rem 1rem;
+
+  @include bp.large-up {
+    padding: 3rem 3rem;
+  }
+}
