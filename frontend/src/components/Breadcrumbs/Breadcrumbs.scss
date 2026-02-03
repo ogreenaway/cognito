@@ -1,11 +1,17 @@
 @use "../../constants/breakpoints" as bp;
-@use "../../constants/colors" as c;
+
+// Breadcrumbs component - Bootstrap utilities used inline:
+// Container: mb-4
+// Scroll wrapper: justify-content-start
+// Links: text-decoration-underline
+// Current: fw-bold
+
+// Custom CSS kept for features Bootstrap doesn't provide:
 
 .breadcrumbs {
   position: relative;
-  margin-bottom: 1rem;
 
-  // Mobile fade gradients
+  // Mobile fade gradients (Bootstrap doesn't have this)
   @include bp.mobile {
     &::before,
     &::after {
@@ -20,16 +26,17 @@
     &::before {
       left: 0;
       transform: translateX(-100%);
-      background: linear-gradient(to right, c.$color-background, transparent);
+      background: linear-gradient(to right, var(--bs-body-bg), transparent);
     }
 
     &::after {
       right: 0;
       transform: translateX(100%);
-      background: linear-gradient(to right, transparent, c.$color-background);
+      background: linear-gradient(to right, transparent, var(--bs-body-bg));
     }
   }
 
+  // Horizontal scroll with hidden scrollbar (Bootstrap doesn't have this)
   &__scroll-wrapper {
     display: flex;
     align-items: center;
@@ -43,12 +50,10 @@
       display: none;
     }
 
-    // Mobile adjustments
     @include bp.mobile {
       margin-inline: -0.75rem;
       padding-inline-start: 0.75rem;
 
-      // Spacer after last item for scroll end
       &::after {
         content: "";
         display: block;
@@ -66,32 +71,32 @@
     white-space: nowrap;
   }
 
+  // Link colors using Bootstrap CSS variables
   &__parent {
-    color: c.$color-text-muted;
+    color: var(--bs-secondary-color);
     font-weight: 700;
-    text-decoration: underline;
 
     &:hover {
-      color: c.$color-text-muted-hover;
+      color: var(--color-muted-hover);
     }
   }
 
   &__home {
     display: block;
-    color: c.$color-text-muted;
+    color: var(--bs-secondary-color);
 
     &:hover {
-      color: c.$color-text-muted-hover;
+      color: var(--color-muted-hover);
     }
   }
 
+  // Diagonal separator color (custom variable)
   &__spacer {
-    color: c.$color-spacer;
+    color: var(--color-spacer);
     margin-inline: 0.5rem;
   }
 
   &__current {
-    font-weight: 700;
-    color: c.$color-text-body;
+    color: var(--bs-body-color);
   }
 }

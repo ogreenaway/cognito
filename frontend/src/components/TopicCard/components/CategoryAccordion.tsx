@@ -25,14 +25,14 @@ const CategoryAccordion: React.FC<CategoryAccordionProps> = ({ category }) => {
   };
 
   return (
-    <div className="category-accordion">
+    <div className="rounded bg-body mb-3 border">
       <button
-        className="category-accordion__header"
+        className="category-accordion__header btn btn-link w-100 d-flex align-items-center justify-content-between p-3 text-start text-decoration-none"
         onClick={handleToggle}
         aria-expanded={isExpanded}
         type="button"
       >
-        <span className="category-accordion__name">{category.name}</span>
+        <span className="fw-medium text-body">{category.name}</span>
         <ChevronIcon isExpanded={isExpanded} />
       </button>
       <div
@@ -40,7 +40,7 @@ const CategoryAccordion: React.FC<CategoryAccordionProps> = ({ category }) => {
         className="category-accordion__content"
         style={{ height: contentHeight }}
       >
-        <div className="category-accordion__divider" />
+        <div className="border-bottom" />
         {category.subtopics.map((subtopic, index) => (
           <SubtopicLink key={index} name={subtopic.name} url={subtopic.url} />
         ))}

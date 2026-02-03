@@ -1,24 +1,7 @@
 @import "./components/CategoryAccordion.scss";
 
-.topic-card {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 0.375rem;
-
-  &__header {
-    padding: 1rem 0.75rem;
-    border-bottom: 1px solid #dee2e6;
-  }
-
-  &__title {
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0;
-    color: #212529;
-  }
-
-  &__body {
-    padding: 0.75rem;
-    padding-bottom: 0;
-  }
-}
+// TopicCard component now uses Bootstrap utilities
+// Container: bg-body-secondary border rounded
+// Header: py-4 px-3 border-bottom
+// Title: h6 mb-0
+// Body: p-3 pb-0

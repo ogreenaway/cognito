@@ -1,45 +1,23 @@
+// CategoryAccordion - Bootstrap utilities used inline:
+// Container: rounded bg-body mb-3 border
+// Header button: btn btn-link w-100 d-flex align-items-center justify-content-between p-3 text-start text-decoration-none
+// Name: fw-medium text-body
+// Divider: border-bottom
+// Links: my-4 mx-3 d-block link-body-emphasis
+
+// Custom CSS kept for features Bootstrap doesn't provide:
+
 .category-accordion {
-  background-color: #ffffff;
-  border: 1px solid #dee2e6;
-  border-radius: 0.375rem;
-  margin-bottom: 0.75rem;
-
-  &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0.75rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    color: inherit;
-    font: inherit;
-
-    &:hover {
-      background-color: #f8f9fa;
-    }
-
-    &:focus {
-      outline: 2px solid #0d6efd;
-      outline-offset: -2px;
-    }
-  }
-
-  &__name {
-    font-weight: 500;
-    color: #212529;
-  }
-
+  // Chevron icon circle (Bootstrap doesn't have this pattern)
   &__chevron {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 2rem;
     height: 2rem;
-    border: 1px solid #dee2e6;
+    border: 1px solid var(--bs-border-color);
     border-radius: 50%;
+    background-color: var(--bs-secondary-bg);
     transition: transform 0.3s ease;
 
     svg {
@@ -53,29 +31,16 @@
     }
   }
 
+  // Height animation for collapse (Bootstrap collapse uses different approach)
   &__content {
     height: 0;
     overflow: hidden;
     transition: height 0.3s ease;
   }
 
-  &__divider {
-    border-top: 1px solid #dee2e6;
-  }
-
-  &__link-wrapper {
-    padding: 0;
-  }
-
-  &__link {
-    display: block;
-    padding: 1rem 0.75rem;
-    color: #212529;
-    text-decoration: none;
-
-    &:hover {
-      color: #0d6efd;
-      text-decoration: underline;
-    }
+  // Header hover state to match chevron
+  &__header:hover &__chevron {
+    background-color: var(--bs-primary-bg-subtle);
+    border-color: var(--bs-primary-bg-subtle);
   }
 }

@@ -1,5 +1,3 @@
-import "./Page.scss";
-
 import React, { ReactNode } from "react";
 
 interface PageProps {
@@ -7,7 +5,7 @@ interface PageProps {
 }
 
 function Page({ children }: PageProps) {
-  return <div className="page">{children}</div>;
+  return <div className="container py-5 px-lg-5">{children}</div>;
 }
 
 export default Page;

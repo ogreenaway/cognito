@@ -1,11 +1,9 @@
-import "./ExamCode.scss";
-
 import React from "react";
 
 function ExamCode() {
   return (
-    <p className="exam-code">
-      <strong>Exam code:</strong> 8461
+    <p className="d-inline-block p-2 mb-3 border rounded bg-body-secondary text-secondary">
+      <strong className="text-body">Exam code:</strong> 8461
     </p>
   );
 }

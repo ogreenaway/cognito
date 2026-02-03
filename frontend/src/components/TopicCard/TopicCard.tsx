@@ -20,11 +20,11 @@ interface TopicCardProps {
 
 const TopicCard: React.FC<TopicCardProps> = ({ topicName, categories }) => {
   return (
-    <div className="topic-card">
-      <div className="topic-card__header">
-        <h2 className="topic-card__title">{topicName}</h2>
+    <div className="bg-body-secondary border rounded">
+      <div className="py-4 px-3 border-bottom">
+        <h2 className="h6 mb-0">{topicName}</h2>
       </div>
-      <div className="topic-card__body">
+      <div className="p-3 pb-0">
         {categories.map((category, index) => (
           <CategoryAccordion key={index} category={category} />
         ))}

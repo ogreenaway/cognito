@@ -1,11 +1,9 @@
-import "./PageTitle.scss";
-
 import React from "react";
 
 function PageTitle() {
   return (
-    <h1 className="page-title">
-      <span className="page-title__muted">AQA GCSE Biology </span>
+    <h1 className="h2 mb-3">
+      <span className="text-secondary">AQA GCSE Biology </span>
       Revision Notes
     </h1>
   );

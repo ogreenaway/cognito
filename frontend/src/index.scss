@@ -1,13 +1,30 @@
+// Bootstrap 5.3 theme overrides
+:root,
+[data-bs-theme="light"] {
+  // Text colors - override to match design
+  --bs-secondary-color: #6e6e6e;
+  --bs-secondary-color-rgb: 110, 110, 110;
+
+  // Custom properties for values Bootstrap doesn't provide
+  --color-spacer: #b0b0b0;
+  --color-muted-hover: #4a4a4a;
+
+  // These already match Bootstrap defaults, listed for reference:
+  // --bs-body-color: #212529
+  // --bs-border-color: #dee2e6
+  // --bs-secondary-bg: #f8f9fa
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

@@ -1,5 +1,2 @@
-@use "../../constants/colors" as c;
-
-.hr {
-  border-bottom: 1px solid c.$color-border;
-}
+// HR component now uses Bootstrap border-bottom utility
+// Border color uses Bootstrap's --bs-border-color (#dee2e6)

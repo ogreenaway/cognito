@@ -11,17 +11,17 @@ const handleDemoClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
 
 const Breadcrumbs = () => {
   return (
-    <div className="breadcrumbs" data-testid="breadcrumbs">
-      <div className="breadcrumbs__scroll-wrapper">
+    <div className="breadcrumbs mb-4" data-testid="breadcrumbs">
+      <div className="breadcrumbs__scroll-wrapper justify-content-start">
         <span className="breadcrumbs__crumb">
-          <a className="breadcrumbs__parent" href="/">
+          <a className="breadcrumbs__parent text-decoration-underline" href="/">
             <HomeIcon />
           </a>
           <Separator />
         </span>
         <span className="breadcrumbs__crumb">
           <a
-            className="breadcrumbs__parent"
+            className="breadcrumbs__parent text-decoration-underline"
             href="/gcse/"
             onClick={handleDemoClick}
           >
@@ -31,7 +31,7 @@ const Breadcrumbs = () => {
         </span>
         <span className="breadcrumbs__crumb">
           <a
-            className="breadcrumbs__parent"
+            className="breadcrumbs__parent text-decoration-underline"
             href="/gcse/biology/"
             onClick={handleDemoClick}
           >
@@ -41,7 +41,7 @@ const Breadcrumbs = () => {
         </span>
         <span className="breadcrumbs__crumb">
           <a
-            className="breadcrumbs__parent"
+            className="breadcrumbs__parent text-decoration-underline"
             href="/gcse/biology/aqa/"
             onClick={handleDemoClick}
           >
@@ -50,7 +50,7 @@ const Breadcrumbs = () => {
           <Separator />
         </span>
         <span className="breadcrumbs__crumb">
-          <span className="breadcrumbs__current">Revision Notes</span>
+          <span className="breadcrumbs__current fw-bold">Revision Notes</span>
         </span>
       </div>
     </div>
