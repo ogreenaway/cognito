@@ -1,14 +1,14 @@
-import "./App.scss";
+import "./CoursePage.scss";
 
-import TopicCard, { Category } from "./components/TopicCard/TopicCard";
+import TopicCard, { Category } from "../../components/TopicCard/TopicCard";
 
-import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
-import ExamCode from "./components/ExamCode/ExamCode";
-import HR from "./components/HR/HR";
-import Page from "./components/Page/Page";
-import PageTitle from "./components/PageTitle/PageTitle";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import ExamCode from "../../components/ExamCode/ExamCode";
+import HR from "../../components/HR/HR";
+import Page from "../../components/Page/Page";
+import PageTitle from "../../components/PageTitle/PageTitle";
 import React from "react";
-import TopicCardGrid from "./components/TopicCardGrid/TopicCardGrid";
+import TopicCardGrid from "../../components/TopicCardGrid/TopicCardGrid";
 
 // Static sample data matching the design reference
 const sampleCategories: Category[] = [
@@ -72,7 +72,7 @@ const sampleCategories2: Category[] = [
   },
 ];
 
-function App() {
+function CoursePage() {
   return (
     <Page>
       <Breadcrumbs />
@@ -87,4 +87,4 @@ function App() {
   );
 }
 
-export default App;
+export default CoursePage;
