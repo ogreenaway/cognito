@@ -39,3 +39,5 @@ export function renderApp(
     </ApolloProvider>
   );
 }
+
+// TODO: consider switching to Vitest Browser Mode
