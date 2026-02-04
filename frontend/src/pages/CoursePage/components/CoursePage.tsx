@@ -23,14 +23,19 @@ const CoursePage: React.FC<CoursePageProps> = ({
   course,
   topicsWithCategories,
 }) => {
+  const examBoardCode = course.examBoardCode.toUpperCase();
+  const levelCode = course.levelCode.toUpperCase();
   return (
     <Page>
       <Breadcrumbs
         subject={course.subjectName}
-        examBoard={course.examBoardCode}
-        level={course.levelCode}
+        examBoard={examBoardCode}
+        level={levelCode}
       />
-      <PageTitle title={course.name} subtitle="Revision Notes" />
+      <PageTitle
+        title={`${examBoardCode} ${levelCode} ${course.subjectName}`}
+        subtitle="Revision Notes"
+      />
       <ExamCode code={course.code} />
       <HR />
       <CardGrid>

@@ -1,26 +1,18 @@
-// Color palette
-// Maps to Bootstrap 5.3 CSS custom properties defined in index.scss
-// Use SCSS variables for compile-time usage, CSS vars for runtime
+// // Color palette
+// // Maps to Bootstrap 5.3 CSS custom properties defined in index.scss
+// // Use SCSS variables for compile-time usage, CSS vars for runtime
 
-// Text colors (matching Bootstrap theme overrides)
-$color-text-muted: #6e6e6e; // --bs-secondary-color
-$color-text-muted-hover: #4a4a4a; // --color-muted-hover
-$color-text-body: #212529; // --bs-body-color
+// // Text colors (matching Bootstrap theme overrides)
+// $color-text-muted: #6e6e6e; // --bs-secondary-color
+// $color-text-muted-hover: #4a4a4a; // --color-muted-hover
+// $color-text-body: #212529; // --bs-body-color
 
-// UI colors (matching Bootstrap defaults)
-$color-border: #dee2e6; // --bs-border-color
-$color-background-subtle: #f8f9fa; // --bs-secondary-bg
-$color-spacer: #b0b0b0; // --color-spacer
+// // UI colors (matching Bootstrap defaults)
+// $color-border: #dee2e6; // --bs-border-color
+// $color-background-subtle: #f8f9fa; // --bs-secondary-bg
+// $color-spacer: #b0b0b0; // --color-spacer
 
-// Background
-$color-background: #fff; // --bs-body-bg
+// // Background
+// $color-background: #fff; // --bs-body-bg
 
-// CSS variable references for use in SCSS
-// Use these when you need runtime theming support
-$var-text-muted: var(--bs-secondary-color);
-$var-text-muted-hover: var(--color-muted-hover);
-$var-text-body: var(--bs-body-color);
-$var-border: var(--bs-border-color);
-$var-background-subtle: var(--bs-secondary-bg);
-$var-spacer: var(--color-spacer);
-$var-background: var(--bs-body-bg);
+// #fbfafa - grey page background
