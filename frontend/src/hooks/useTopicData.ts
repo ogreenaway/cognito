@@ -1,0 +1,87 @@
+import type { Topic, TopicsAPIResponse } from "../types/topic";
+import { useEffect, useState } from "react";
+
+import { ApolloClient } from "@apollo/client";
+import { SUBTOPIC_QUERY } from "../api/subtopicQuery";
+import type { SubtopicsAPIResponse } from "../types/subtopic";
+import { TOPIC_QUERY } from "../api/topicQuery";
+import type { TopicsWithSubtopics } from "../types/topic";
+import { useApolloClient } from "@apollo/client/react";
+
+interface getTopicDataProps {
+  client: ApolloClient;
+  courseId: string;
+  setTopics: (topics: TopicsWithSubtopics[]) => void;
+  setLoading: (loading: boolean) => void;
+}
+
+async function getTopicData({
+  client,
+  courseId,
+  setTopics,
+  setLoading,
+}: getTopicDataProps) {
+  // Fetch all topics for the course
+  const topicsResult = await client
+    .query<TopicsAPIResponse>({
+      query: TOPIC_QUERY,
+      variables: {
+        courseCode: courseId,
+        searchPhrase: null,
+      },
+    })
+    .catch((error) => {
+      throw new Error(
+        `Failed to fetch topics for course ${courseId}: ${error.message}`
+      );
+    });
+
+  const topics = topicsResult.data?.courseTopics ?? [];
+
+  const subtopicPromises = topics.map(async (topic: Topic) => {
+    const subtopicsResult = await client.query<SubtopicsAPIResponse>({
+      query: SUBTOPIC_QUERY,
+      variables: {
+        courseCode: courseId,
+        topicCode: topic.code,
+        searchPhrase: null,
+      },
+    });
+
+    return {
+      topic,
+      subtopics: subtopicsResult.data?.courseSubtopics ?? [],
+    };
+  });
+
+  const topicsWithSubtopics = await Promise.all(subtopicPromises).catch(
+    (error) => {
+      throw new Error(
+        `Failed to fetch subtopics for course ${courseId}: ${error.message}`
+      );
+    }
+  );
+
+  setTopics(topicsWithSubtopics);
+  setLoading(false);
+}
+
+export function useTopicData(courseId: string) {
+  const client = useApolloClient();
+  const [topicsWithSubtopics, setTopics] = useState<TopicsWithSubtopics[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (courseId) {
+      // TODO: use .then() to handle the promise
+      void getTopicData({
+        client,
+        courseId,
+        setTopics,
+        setLoading,
+      });
+    }
+  }, [courseId, client, setTopics]);
+
+  return { topicsWithSubtopics, loading };
+}

@@ -13,85 +13,15 @@ import Spinner from "react-bootstrap/Spinner";
 import SubtopicLink from "../../components/SubtopicLink/SubtopicLink";
 import { useCourseData } from "../../hooks/useCourseData";
 import { useCourseID } from "../../hooks/useCourseID";
-
-// Static sample data matching the design reference
-const sampleCategories = [
-  {
-    name: "Organisation: Digestion",
-    subtopics: [
-      { name: "Principles of Organisation", url: "#" },
-      { name: "The Stomach", url: "#" },
-      { name: "The Human Digestive System", url: "#" },
-      { name: "Enzymes & Metabolism", url: "#" },
-      { name: "Required Practical: Enzymes", url: "#" },
-      { name: "Enzymes & Digestion", url: "#" },
-      { name: "Required Practical: Food Tests", url: "#" },
-    ],
-  },
-  {
-    name: "Organisation: The Cardiovascular & Respiratory System",
-    subtopics: [
-      { name: "The Lungs", url: "#" },
-      { name: "The Heart", url: "#" },
-      { name: "Blood Vessels & Blood", url: "#" },
-    ],
-  },
-  {
-    name: "Health & Disease",
-    subtopics: [
-      { name: "CHD: A Non-Communicable Disease", url: "#" },
-      { name: "Health Issues", url: "#" },
-      { name: "Lifestyle & Non-Communicable Diseases", url: "#" },
-      { name: "Data & Lifestyle Factors", url: "#" },
-      { name: "Cancer", url: "#" },
-    ],
-  },
-  {
-    name: "Plant Tissues, Organs & Systems",
-    subtopics: [
-      { name: "Plant Tissues", url: "#" },
-      { name: "Plant Organ System", url: "#" },
-      { name: "Transpiration", url: "#" },
-      { name: "Translocation", url: "#" },
-    ],
-  },
-];
-
-const sampleCategories2 = [
-  {
-    name: "Cell Biology: Structure",
-    subtopics: [
-      { name: "Cell Structure", url: "#" },
-      { name: "Cell Organelles", url: "#" },
-      { name: "Prokaryotes & Eukaryotes", url: "#" },
-    ],
-  },
-  {
-    name: "Cell Biology: Transport",
-    subtopics: [
-      { name: "Diffusion", url: "#" },
-      { name: "Osmosis", url: "#" },
-      { name: "Active Transport", url: "#" },
-    ],
-  },
-];
-
-const mockData = [
-  {
-    title: "Organisation",
-    categories: sampleCategories,
-  },
-  {
-    title: "Cell Biology",
-    categories: sampleCategories2,
-  },
-];
+import { useTopicData } from "../../hooks/useTopicData";
 
 const CoursePage: React.FC = () => {
   const courseId = useCourseID();
-  const { course, loading, error } = useCourseData(courseId);
+  const { course, loading: courseLoading, error } = useCourseData(courseId);
+  const { topicsWithSubtopics, loading: topicsLoading } =
+    useTopicData(courseId);
 
-  if (loading) {
+  if (courseLoading || topicsLoading) {
     return (
       <Page>
         <div className="d-flex justify-content-center align-items-center py-5">
@@ -103,7 +33,7 @@ const CoursePage: React.FC = () => {
     );
   }
 
-  if (error || !course) {
+  if (error || !course || !topicsWithSubtopics) {
     return (
       <Page>
         <div className="alert alert-danger" role="alert">
@@ -125,20 +55,18 @@ const CoursePage: React.FC = () => {
       <HR />
       <CardGrid>
         {/* TODO: have an ID for each loop */}
-        {mockData.map((topic) => (
-          <Card key={topic.title} title={topic.title}>
-            {topic.categories.map((category) => (
-              <CategoryAccordion key={category.name} title={category.name}>
-                {category.subtopics.map((subtopic, index) => (
-                  <SubtopicLink
-                    key={index}
-                    name={subtopic.name}
-                    // TODO: switch to code
-                    code={subtopic.url}
-                  />
-                ))}
-              </CategoryAccordion>
-            ))}
+        {topicsWithSubtopics.map(({ topic, subtopics }) => (
+          <Card key={topic.code} title={topic.name}>
+            {/* {topic.categories.map((category) => ( */}
+            <CategoryAccordion key={"example"} title={"example"}>
+              {subtopics.map((subtopic) => (
+                <SubtopicLink
+                  key={subtopic.code}
+                  name={subtopic.name}
+                  code={subtopic.code}
+                />
+              ))}
+            </CategoryAccordion>
           </Card>
         ))}
       </CardGrid>

@@ -1,12 +1,10 @@
 // TODO: remove everything we don't need
 
-export type Subtopic = {
-  id: string;
-  key: string;
+import { Subtopic } from "./subtopic";
+
+export type Topic = {
   code: string;
   name: string;
-  masterCourseSubtopicCode: string | null;
-  subjectCode: string;
   totalScore: number;
   learnTotalScore: number;
   learnElementCount: number;
@@ -14,9 +12,15 @@ export type Subtopic = {
   revisionElementCount: number;
   flashcardCount: number;
   isHidden: boolean;
-  examQs: number;
+  parentSection: string | null;
+  subtopicCount: number;
 };
 
-export type SubtopicsAPIResponse = {
-  courseSubtopics: Subtopic[];
+export type TopicsAPIResponse = {
+  courseTopics: Topic[];
+};
+
+export type TopicsWithSubtopics = {
+  topic: Topic;
+  subtopics: Subtopic[];
 };
