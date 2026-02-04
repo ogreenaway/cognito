@@ -18,7 +18,7 @@ import { useTopicData } from "../../hooks/useTopicData";
 const CoursePage: React.FC = () => {
   const courseId = useCourseID();
   const { course, loading: courseLoading, error } = useCourseData(courseId);
-  const { topicsWithSubtopics, loading: topicsLoading } =
+  const { topicsWithCategories, loading: topicsLoading } =
     useTopicData(courseId);
 
   if (courseLoading || topicsLoading) {
@@ -33,7 +33,7 @@ const CoursePage: React.FC = () => {
     );
   }
 
-  if (error || !course || !topicsWithSubtopics) {
+  if (error || !course || !topicsWithCategories) {
     return (
       <Page>
         <div className="alert alert-danger" role="alert">
@@ -55,18 +55,19 @@ const CoursePage: React.FC = () => {
       <HR />
       <CardGrid>
         {/* TODO: have an ID for each loop */}
-        {topicsWithSubtopics.map(({ topic, subtopics }) => (
+        {topicsWithCategories.map((topic) => (
           <Card key={topic.code} title={topic.name}>
-            {/* {topic.categories.map((category) => ( */}
-            <CategoryAccordion key={"example"} title={"example"}>
-              {subtopics.map((subtopic) => (
-                <SubtopicLink
-                  key={subtopic.code}
-                  name={subtopic.name}
-                  code={subtopic.code}
-                />
-              ))}
-            </CategoryAccordion>
+            {topic.categories.map((category) => (
+              <CategoryAccordion key={category.name} title={category.name}>
+                {category.subtopics.map((subtopic) => (
+                  <SubtopicLink
+                    key={subtopic.code}
+                    name={subtopic.name}
+                    code={subtopic.code}
+                  />
+                ))}
+              </CategoryAccordion>
+            ))}
           </Card>
         ))}
       </CardGrid>
