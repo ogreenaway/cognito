@@ -1,81 +1,75 @@
 import OpenAI from "openai";
 import type { TopicsWithSubtopics } from "../types/topic";
 
-const topicsSchema = {
+const topicSchema = {
   type: "json_schema",
-  name: "topics_with_categories",
+  name: "topic_with_categories",
   schema: {
     type: "object",
     properties: {
-      topics: {
+      code: { type: "string" },
+      name: { type: "string" },
+      categories: {
         type: "array",
         items: {
           type: "object",
           properties: {
-            code: { type: "string" },
             name: { type: "string" },
-            categories: {
+            subtopics: {
               type: "array",
               items: {
                 type: "object",
                 properties: {
+                  code: { type: "string" },
                   name: { type: "string" },
-                  subtopics: {
-                    type: "array",
-                    items: {
-                      type: "object",
-                      properties: {
-                        code: { type: "string" },
-                        name: { type: "string" },
-                      },
-                      required: ["code", "name"],
-                      additionalProperties: false,
-                    },
-                  },
                 },
-                required: ["name", "subtopics"],
+                required: ["code", "name"],
                 additionalProperties: false,
               },
             },
           },
-          required: ["code", "name", "categories"],
+          required: ["name", "subtopics"],
           additionalProperties: false,
         },
       },
     },
-    required: ["topics"],
+    required: ["code", "name", "categories"],
     additionalProperties: false,
   },
   strict: true,
 } as const;
 
 const createCategories = async (topicsWithSubtopics: TopicsWithSubtopics[]) => {
-  const formattedTopics = JSON.stringify(
-    topicsWithSubtopics.map((topic) => ({
-      code: topic.topic.code,
-      name: topic.topic.name,
-      subtopics: topic.subtopics.map((subtopic) => ({
-        name: subtopic.name,
-        code: subtopic.code,
-      })),
-    }))
+  const client = new OpenAI({
+    apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+    dangerouslyAllowBrowser: true,
+  });
+
+  const topicPromises = topicsWithSubtopics.map(
+    async ({ topic, subtopics }) => {
+      const formattedTopic = JSON.stringify({
+        code: topic.code,
+        name: topic.name,
+        subtopics: subtopics.map((subtopic) => ({
+          code: subtopic.code,
+          name: subtopic.name,
+        })),
+      });
+
+      const response = await client.responses.create({
+        model: "gpt-4o-mini",
+        input: `Here is a topic with subtopics for a child's revision: ${formattedTopic}. Group the subtopics into 2-5 categories. Return the topic with all subtopics that have been provided.`,
+        text: {
+          format: topicSchema,
+        },
+      });
+
+      return JSON.parse(response.output_text);
+    }
   );
 
   try {
-    const client = new OpenAI({
-      apiKey: process.env.REACT_APP_OPENAI_API_KEY,
-      dangerouslyAllowBrowser: true,
-    });
-
-    const response = await client.responses.create({
-      model: "gpt-4o-mini",
-      input: `Here is an array of topics with subtopics for a child's revision: ${formattedTopics}. For each topic, group the subtopics into 2-5 categories. Return all topics and subtopics that have been provided.`,
-      text: {
-        format: topicsSchema,
-      },
-    });
-
-    const topics = JSON.parse(response.output_text).topics;
+    const topics = await Promise.all(topicPromises);
     return topics;
   } catch (error) {
     throw new Error(
