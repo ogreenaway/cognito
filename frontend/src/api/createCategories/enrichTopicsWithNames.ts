@@ -1,5 +1,7 @@
 import type { Topic, TopicsWithSubtopics } from "../../types/topic";
 
+import { Subtopic } from "../../types/subtopic";
+
 export const enrichTopicsWithNames = (
   topics: Topic[],
   topicsWithSubtopics: TopicsWithSubtopics[]
@@ -20,18 +22,21 @@ export const enrichTopicsWithNames = (
       name: topicName,
       categories: categories.map(({ name, subtopics }) => ({
         name,
-        subtopics: subtopics.map(({ code }) => {
-          const subtopicName = allSubtopicNames.find(
-            (subtopic) => subtopic.code === code
-          )?.name;
-          if (!subtopicName) {
-            throw new Error(`Subtopic name not found for code: ${code}`);
-          }
-          return {
-            code,
-            name: subtopicName,
-          };
-        }),
+        subtopics: subtopics
+          .map(({ code }) => {
+            const subtopicName = allSubtopicNames.find(
+              (subtopic) => subtopic.code === code
+            )?.name;
+            if (!subtopicName) {
+              console.error(`Subtopic name not found for code: ${code}`);
+              return null;
+            }
+            return {
+              code,
+              name: subtopicName,
+            };
+          })
+          .filter(Boolean) as Subtopic[],
       })),
     };
   });

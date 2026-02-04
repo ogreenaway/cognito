@@ -64,7 +64,7 @@ async function getTopicData({
   );
 
   setLoadingState(
-    `Created categories for 0 of ${topicsWithSubtopics.length} topics`
+    `Creating categories for the ${topicsWithSubtopics.length} topics`
   );
   const topicsWithCategories = await createCategories(
     topicsWithSubtopics,
