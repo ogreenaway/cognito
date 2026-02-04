@@ -1,3 +1,5 @@
+import "./SubtopicLink.scss";
+
 import React from "react";
 
 interface SubtopicLinkProps {
@@ -9,7 +11,7 @@ const SubtopicLink: React.FC<SubtopicLinkProps> = ({ name, code }) => {
   return (
     <div>
       <a
-        className="my-4 mx-3 d-block link-body-emphasis"
+        className="my-4 mx-3 d-block text-decoration-none subtopic-link"
         href={`https://feature.cognitoedu.org/coursesubtopic/${code}`}
       >
         {name}
