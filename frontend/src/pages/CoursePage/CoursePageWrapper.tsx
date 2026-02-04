@@ -1,6 +1,13 @@
+import {
+  getCachedCategories,
+  getCachedVersion,
+} from "../../utils/localStorage";
+
+import CoursePage from "./components/CoursePage";
 import CoursePageCreateCategories from "./components/CoursePageCreateCategories";
 import Page from "../../components/Page/Page";
 import React from "react";
+import { TopicType } from "../../hooks/useTopicData";
 import { useCourseCode } from "../../hooks/useCourseCode";
 import { useCourseData } from "../../hooks/useCourseData";
 
@@ -28,11 +35,20 @@ const CoursePageWrapper: React.FC = () => {
     );
   }
 
-  return <CoursePageCreateCategories course={course} />;
+  const cachedVersion = getCachedVersion(courseCode);
+  const cachedCategories = getCachedCategories(courseCode);
 
-  // return (
-  //   <CoursePage course={course} topicsWithCategories={topicsWithCategories} />
-  // );
+  if (
+    cachedVersion === course.version &&
+    cachedCategories &&
+    cachedCategories.length > 0
+  ) {
+    return (
+      <CoursePage course={course} topicsWithCategories={cachedCategories} />
+    );
+  }
+
+  return <CoursePageCreateCategories course={course} />;
 };
 
 export default CoursePageWrapper;

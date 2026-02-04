@@ -6,6 +6,7 @@ import { SUBTOPIC_QUERY } from "../api/subtopicQuery";
 import type { SubtopicsAPIResponse } from "../types/subtopic";
 import { TOPIC_QUERY } from "../api/topicQuery";
 import createCategories from "../api/createCategories/createCategories";
+import { setCachedCategories } from "../utils/localStorage";
 import { useApolloClient } from "@apollo/client/react";
 
 // TODO: move to types and clean up types
@@ -27,14 +28,14 @@ export type TopicType = {
 
 interface getTopicDataProps {
   client: ApolloClient;
-  courseId: string;
+  courseCode: string;
   setTopics: (topics: TopicType[]) => void;
   setLoadingState: (loadingState: string | undefined) => void;
 }
 
 async function getTopicData({
   client,
-  courseId,
+  courseCode,
   setTopics,
   setLoadingState,
 }: getTopicDataProps) {
@@ -43,13 +44,13 @@ async function getTopicData({
     .query<TopicsAPIResponse>({
       query: TOPIC_QUERY,
       variables: {
-        courseCode: courseId,
+        courseCode,
         searchPhrase: null,
       },
     })
     .catch((error) => {
       throw new Error(
-        `Failed to fetch topics for course ${courseId}: ${error.message}`
+        `Failed to fetch topics for course ${courseCode}: ${error.message}`
       );
     });
 
@@ -59,7 +60,7 @@ async function getTopicData({
     const subtopicsResult = await client.query<SubtopicsAPIResponse>({
       query: SUBTOPIC_QUERY,
       variables: {
-        courseCode: courseId,
+        courseCode,
         topicCode: topic.code,
         searchPhrase: null,
       },
@@ -74,7 +75,7 @@ async function getTopicData({
   const topicsWithSubtopics = await Promise.all(subtopicPromises).catch(
     (error) => {
       throw new Error(
-        `Failed to fetch subtopics for course ${courseId}: ${error.message}`
+        `Failed to fetch subtopics for course ${courseCode}: ${error.message}`
       );
     }
   );
@@ -87,11 +88,14 @@ async function getTopicData({
     setLoadingState
   );
 
+  // Save categories to localStorage
+  setCachedCategories(courseCode, topicsWithCategories);
+
   setTopics(topicsWithCategories);
   setLoadingState(undefined);
 }
 
-export function useTopicData(courseId: string) {
+export function useTopicData(courseCode: string) {
   const client = useApolloClient();
   const [topicsWithCategories, setTopics] = useState<TopicType[]>([]);
   const [loadingState, setLoadingState] = useState<string | undefined>(
@@ -99,16 +103,16 @@ export function useTopicData(courseId: string) {
   );
 
   useEffect(() => {
-    if (courseId) {
+    if (courseCode) {
       // TODO: use .then() to handle the promise
       void getTopicData({
         client,
-        courseId,
+        courseCode,
         setTopics,
         setLoadingState,
       });
     }
-  }, [courseId, client, setTopics]);
+  }, [courseCode, client, setTopics]);
 
   return { topicsWithCategories, loadingState };
 }
