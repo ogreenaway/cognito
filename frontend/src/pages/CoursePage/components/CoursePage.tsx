@@ -6,6 +6,7 @@ import CardGrid from "../../../components/CardGrid/CardGrid";
 import CategoryAccordion from "../../../components/CategoryAccordion/CategoryAccordion";
 import { Course } from "../../../types/course";
 import ExamCode from "../../../components/ExamCode/ExamCode";
+import FavouriteButton from "../../../components/FavouriteButton/FavouriteButton";
 import HR from "../../../components/HR/HR";
 import Page from "../../../components/Page/Page";
 import PageTitle from "../../../components/PageTitle/PageTitle";
@@ -47,11 +48,16 @@ const CoursePage: React.FC<CoursePageProps> = ({
               {topic.categories.map((category) => (
                 <CategoryAccordion key={category.name} title={category.name}>
                   {category.subtopics.map((subtopic) => (
-                    <SubtopicLink
+                    <div
                       key={subtopic.code}
-                      name={subtopic.name}
-                      code={subtopic.code}
-                    />
+                      className="subtopic-row d-flex align-items-center"
+                    >
+                      <FavouriteButton
+                        courseCode={course.code}
+                        subtopicCode={subtopic.code}
+                      />
+                      <SubtopicLink name={subtopic.name} code={subtopic.code} />
+                    </div>
                   ))}
                 </CategoryAccordion>
               ))}

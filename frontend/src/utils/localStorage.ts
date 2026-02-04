@@ -2,7 +2,8 @@ import { TopicType } from "../hooks/useTopicData";
 
 type LocalStorageKey =
   | `course_version_${string}`
-  | `course_categories_${string}`;
+  | `course_categories_${string}`
+  | `favourites_${string}`;
 
 const getLocalStorage = <T>(key: LocalStorageKey): T | null => {
   // TODO: set these to expire
@@ -45,4 +46,53 @@ export const setCachedCategories = (
   categories: TopicType[]
 ): void => {
   setLocalStorage<TopicType[]>(`course_categories_${courseCode}`, categories);
+};
+
+// Favourites utilities
+const MAX_FAVOURITES = 20;
+
+export const getFavourites = (courseCode: string): string[] | null => {
+  return getLocalStorage<string[]>(`favourites_${courseCode}`);
+};
+
+export const setFavourites = (
+  courseCode: string,
+  subtopicCodes: string[]
+): void => {
+  setLocalStorage<string[]>(`favourites_${courseCode}`, subtopicCodes);
+};
+
+export const isFavourite = (
+  courseCode: string,
+  subtopicCode: string
+): boolean => {
+  const favourites = getFavourites(courseCode);
+  return favourites ? favourites.includes(subtopicCode) : false;
+};
+
+export type ToggleFavouriteResult =
+  | { success: true; isFavourite: boolean; favourites: string[] }
+  | { success: false; reason: "limit_reached" };
+
+export const toggleFavourite = (
+  courseCode: string,
+  subtopicCode: string
+): ToggleFavouriteResult => {
+  const favourites = getFavourites(courseCode) ?? [];
+  const isCurrentlyFavourite = favourites.includes(subtopicCode);
+
+  if (isCurrentlyFavourite) {
+    // Remove from favourites
+    const newFavourites = favourites.filter((code) => code !== subtopicCode);
+    setFavourites(courseCode, newFavourites);
+    return { success: true, isFavourite: false, favourites: newFavourites };
+  } else {
+    // Add to favourites (check limit first)
+    if (favourites.length >= MAX_FAVOURITES) {
+      return { success: false, reason: "limit_reached" };
+    }
+    const newFavourites = [...favourites, subtopicCode];
+    setFavourites(courseCode, newFavourites);
+    return { success: true, isFavourite: true, favourites: newFavourites };
+  }
 };

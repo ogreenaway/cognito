@@ -1,0 +1,68 @@
+.favourite-button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus {
+    outline: 2px solid #0d6efd;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #0d6efd;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  &__star {
+    transition: color 0.2s ease;
+  }
+
+  // Unselected state - white/outline star
+  &--unselected {
+    color: #666;
+
+    &:hover {
+      color: #f4c150;
+    }
+  }
+
+  // Selected state - yellow filled star
+  &--selected {
+    color: #f4c150;
+
+    &:hover {
+      color: #e6b340;
+    }
+  }
+
+  // Error state - yellow star with error styling
+  &--error {
+    color: #f4c150;
+  }
+
+  &__error {
+    font-size: 10px;
+    color: #dc3545;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+}
