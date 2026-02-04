@@ -1,4 +1,4 @@
-import { TopicType } from "../hooks/useTopicData";
+import { Topic } from "../types/topic";
 
 type LocalStorageKey =
   | `course_version_${string}`
@@ -33,8 +33,8 @@ export const getCachedVersion = (courseCode: string): number | null => {
   return getLocalStorage<number>(`course_version_${courseCode}`);
 };
 
-export const getCachedCategories = (courseCode: string): TopicType[] | null => {
-  return getLocalStorage<TopicType[]>(`course_categories_${courseCode}`);
+export const getCachedCategories = (courseCode: string): Topic[] | null => {
+  return getLocalStorage<Topic[]>(`course_categories_${courseCode}`);
 };
 
 export const setCachedVersion = (courseCode: string, version: number): void => {
@@ -43,9 +43,9 @@ export const setCachedVersion = (courseCode: string, version: number): void => {
 
 export const setCachedCategories = (
   courseCode: string,
-  categories: TopicType[]
+  categories: Topic[]
 ): void => {
-  setLocalStorage<TopicType[]>(`course_categories_${courseCode}`, categories);
+  setLocalStorage<Topic[]>(`course_categories_${courseCode}`, categories);
 };
 
 // Favourites utilities

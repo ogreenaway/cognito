@@ -1,11 +1,6 @@
 import { Subtopic } from "./subtopic";
 
-type CategoryApi = {
+export type Category = {
   name: string;
-  // To avoid hallucinating subtopics, we only get the IDs
-  subtopicIds: string[];
-};
-
-export type Category = Omit<CategoryApi, "subtopicIds"> & {
   subtopics: Subtopic[];
 };

@@ -12,12 +12,11 @@ import Page from "../../../components/Page/Page";
 import PageTitle from "../../../components/PageTitle/PageTitle";
 import React from "react";
 import SubtopicLink from "../../../components/SubtopicLink/SubtopicLink";
-import { TopicType } from "../../../hooks/useTopicData";
+import { Topic } from "../../../types/topic";
 
 interface CoursePageProps {
   course: Course;
-  //   TODO: move to types
-  topicsWithCategories: TopicType[];
+  topicsWithCategories: Topic[];
 }
 
 const CoursePage: React.FC<CoursePageProps> = ({

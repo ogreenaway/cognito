@@ -1,26 +1,24 @@
-// TODO: remove everything we don't need
-
+import { Category } from "./category";
 import { Subtopic } from "./subtopic";
 
+// Minimal topic type from API response
+export type SimplifiedTopic = {
+  code: string;
+  name: string;
+};
+
+// Full topic type with categories (after categorization)
 export type Topic = {
   code: string;
   name: string;
-  totalScore: number;
-  learnTotalScore: number;
-  learnElementCount: number;
-  revisionTotalScore: number;
-  revisionElementCount: number;
-  flashcardCount: number;
-  isHidden: boolean;
-  parentSection: string | null;
-  subtopicCount: number;
+  categories: Category[];
 };
 
 export type TopicsAPIResponse = {
-  courseTopics: Topic[];
+  courseTopics: SimplifiedTopic[];
 };
 
 export type TopicsWithSubtopics = {
-  topic: Topic;
+  topic: SimplifiedTopic;
   subtopics: Subtopic[];
 };

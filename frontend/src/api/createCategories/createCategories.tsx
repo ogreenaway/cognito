@@ -1,6 +1,6 @@
+import type { Topic, TopicsWithSubtopics } from "../../types/topic";
+
 import OpenAI from "openai";
-import type { SimplifiedTopic } from "./simplifiedTypes";
-import type { TopicsWithSubtopics } from "../../types/topic";
 import { createTopicPromises } from "./createTopicPromises";
 import { enrichTopicsWithNames } from "./enrichTopicsWithNames";
 
@@ -23,10 +23,8 @@ const createCategories = async (
   });
 
   try {
-    const simplifiedTopics: SimplifiedTopic[] = await Promise.all(
-      topicPromises
-    );
-    return enrichTopicsWithNames(simplifiedTopics, topicsWithSubtopics);
+    const topics: Topic[] = await Promise.all(topicPromises);
+    return enrichTopicsWithNames(topics, topicsWithSubtopics);
   } catch (error) {
     throw new Error(
       `Error: ${error instanceof Error ? error.message : String(error)}`

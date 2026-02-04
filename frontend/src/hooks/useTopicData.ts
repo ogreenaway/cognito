@@ -1,4 +1,4 @@
-import type { Topic, TopicsAPIResponse } from "../types/topic";
+import type { SimplifiedTopic, Topic, TopicsAPIResponse } from "../types/topic";
 import { useEffect, useState } from "react";
 
 import { ApolloClient } from "@apollo/client";
@@ -9,27 +9,10 @@ import createCategories from "../api/createCategories/createCategories";
 import { setCachedCategories } from "../utils/localStorage";
 import { useApolloClient } from "@apollo/client/react";
 
-// TODO: move to types and clean up types
-type SubtopicType = {
-  code: string;
-  name: string;
-};
-
-type CategoryType = {
-  name: string;
-  subtopics: SubtopicType[];
-};
-
-export type TopicType = {
-  code: string;
-  name: string;
-  categories: CategoryType[];
-};
-
 interface getTopicDataProps {
   client: ApolloClient;
   courseCode: string;
-  setTopics: (topics: TopicType[]) => void;
+  setTopics: (topics: Topic[]) => void;
   setLoadingState: (loadingState: string | undefined) => void;
 }
 
@@ -56,7 +39,7 @@ async function getTopicData({
 
   const topics = topicsResult.data?.courseTopics ?? [];
 
-  const subtopicPromises = topics.map(async (topic: Topic) => {
+  const subtopicPromises = topics.map(async (topic: SimplifiedTopic) => {
     const subtopicsResult = await client.query<SubtopicsAPIResponse>({
       query: SUBTOPIC_QUERY,
       variables: {
@@ -97,7 +80,7 @@ async function getTopicData({
 
 export function useTopicData(courseCode: string) {
   const client = useApolloClient();
-  const [topicsWithCategories, setTopics] = useState<TopicType[]>([]);
+  const [topicsWithCategories, setTopics] = useState<Topic[]>([]);
   const [loadingState, setLoadingState] = useState<string | undefined>(
     "Gathering topics"
   );

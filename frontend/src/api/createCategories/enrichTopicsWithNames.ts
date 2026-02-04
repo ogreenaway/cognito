@@ -1,15 +1,14 @@
-import type { SimplifiedTopic } from "./simplifiedTypes";
-import type { TopicsWithSubtopics } from "../../types/topic";
+import type { Topic, TopicsWithSubtopics } from "../../types/topic";
 
 export const enrichTopicsWithNames = (
-  simplifiedTopics: SimplifiedTopic[],
+  topics: Topic[],
   topicsWithSubtopics: TopicsWithSubtopics[]
-) => {
+): Topic[] => {
   const allSubtopicNames = topicsWithSubtopics.flatMap(
     ({ subtopics }) => subtopics
   );
 
-  const topics = simplifiedTopics.map(({ code, categories }) => {
+  return topics.map(({ code, categories }) => {
     const topicName = topicsWithSubtopics.find(
       ({ topic }) => topic.code === code
     )?.topic.name;
@@ -36,6 +35,4 @@ export const enrichTopicsWithNames = (
       })),
     };
   });
-
-  return topics;
 };

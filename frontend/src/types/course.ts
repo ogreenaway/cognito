@@ -1,5 +1,4 @@
-// TODO: move to a separate file in the types directory and rename to Course
-type CourseApi = {
+export type Course = {
   code: string;
   version: number;
   subjectName: string;
@@ -8,7 +7,5 @@ type CourseApi = {
 };
 
 export type CourseAPIResponse = {
-  course: CourseApi;
+  course: Course;
 };
-
-export type Course = CourseApi;
