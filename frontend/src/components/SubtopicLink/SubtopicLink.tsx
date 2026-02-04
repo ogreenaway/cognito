@@ -14,6 +14,7 @@ const SubtopicLink: React.FC<SubtopicLinkProps> = ({ name, code }) => {
         className="my-4 mx-3 d-block text-decoration-none subtopic-link"
         href={`https://feature.cognitoedu.org/coursesubtopic/${code}`}
         target="_blank"
+        rel="noreferrer"
       >
         {name}
       </a>

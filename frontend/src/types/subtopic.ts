@@ -1,20 +1,8 @@
 // TODO: remove everything we don't need
 
 export type Subtopic = {
-  id: string;
-  key: string;
   code: string;
   name: string;
-  masterCourseSubtopicCode: string | null;
-  subjectCode: string;
-  totalScore: number;
-  learnTotalScore: number;
-  learnElementCount: number;
-  revisionTotalScore: number;
-  revisionElementCount: number;
-  flashcardCount: number;
-  isHidden: boolean;
-  examQs: number;
 };
 
 export type SubtopicsAPIResponse = {

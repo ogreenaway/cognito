@@ -5,15 +5,6 @@ export const TOPIC_QUERY = gql`
     courseTopics(courseCode: $courseCode, searchPhrase: $searchPhrase) {
       code
       name
-      totalScore
-      learnTotalScore
-      learnElementCount
-      revisionTotalScore
-      revisionElementCount
-      flashcardCount
-      isHidden
-      parentSection
-      subtopicCount
     }
   }
 `;

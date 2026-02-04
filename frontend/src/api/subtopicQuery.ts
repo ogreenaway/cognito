@@ -11,20 +11,8 @@ export const SUBTOPIC_QUERY = gql`
       topicCode: $topicCode
       searchPhrase: $searchPhrase
     ) {
-      id
-      key
       code
       name
-      masterCourseSubtopicCode
-      subjectCode
-      totalScore
-      learnTotalScore
-      learnElementCount
-      revisionTotalScore
-      revisionElementCount
-      flashcardCount
-      isHidden
-      examQs
     }
   }
 `;
