@@ -3,13 +3,14 @@ import "./CoursePage.scss";
 import TopicCard, { Category } from "../../components/TopicCard/TopicCard";
 
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import CardGrid from "../../components/CardGrid/CardGrid";
+import CategoryAccordion from "../../components/TopicCard/components/CategoryAccordion";
 import ExamCode from "../../components/ExamCode/ExamCode";
 import HR from "../../components/HR/HR";
 import Page from "../../components/Page/Page";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import React from "react";
 import Spinner from "react-bootstrap/Spinner";
-import TopicCardGrid from "../../components/TopicCardGrid/TopicCardGrid";
 import { useCourseData } from "../../hooks/useCourseData";
 import { useCourseID } from "../../hooks/useCourseID";
 
@@ -111,10 +112,18 @@ function CoursePage() {
       <PageTitle title={course.name} subtitle="Revision Notes" />
       <ExamCode code={course.code} />
       <HR />
-      <TopicCardGrid>
-        <TopicCard topicName="Organisation" categories={sampleCategories} />
-        <TopicCard topicName="Cell Biology" categories={sampleCategories2} />
-      </TopicCardGrid>
+      <CardGrid>
+        <TopicCard title="Organisation">
+          {sampleCategories.map((category, index) => (
+            <CategoryAccordion key={index} category={category} />
+          ))}
+        </TopicCard>
+        <TopicCard title="Cell Biology">
+          {sampleCategories2.map((category, index) => (
+            <CategoryAccordion key={index} category={category} />
+          ))}
+        </TopicCard>
+      </CardGrid>
     </Page>
   );
 }

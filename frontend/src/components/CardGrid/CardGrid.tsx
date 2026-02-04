@@ -1,10 +1,10 @@
 import React from "react";
 
-interface TopicCardGridProps {
+interface CardGridProps {
   children: React.ReactNode;
 }
 
-const TopicCardGrid: React.FC<TopicCardGridProps> = ({ children }) => {
+const CardGrid: React.FC<CardGridProps> = ({ children }) => {
   return (
     <div className="row gy-4 my-5">
       {React.Children.map(children, (child) => (
@@ -14,4 +14,4 @@ const TopicCardGrid: React.FC<TopicCardGridProps> = ({ children }) => {
   );
 };
 
-export default TopicCardGrid;
+export default CardGrid;
