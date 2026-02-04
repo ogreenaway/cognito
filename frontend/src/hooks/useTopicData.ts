@@ -5,7 +5,7 @@ import { ApolloClient } from "@apollo/client";
 import { SUBTOPIC_QUERY } from "../api/subtopicQuery";
 import type { SubtopicsAPIResponse } from "../types/subtopic";
 import { TOPIC_QUERY } from "../api/topicQuery";
-import createCategories from "../api/createCategories";
+import createCategories from "../api/createCategories/createCategories";
 import { useApolloClient } from "@apollo/client/react";
 
 type SubtopicType = {
@@ -78,7 +78,9 @@ async function getTopicData({
     }
   );
 
-  setLoadingState(`Created 0 of ${topicsWithSubtopics.length} categories`);
+  setLoadingState(
+    `Created categories for 0 of ${topicsWithSubtopics.length} topics`
+  );
   const topicsWithCategories = await createCategories(
     topicsWithSubtopics,
     setLoadingState
