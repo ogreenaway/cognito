@@ -1,14 +1,20 @@
+import "./CategoryAccordion.scss";
+
 import React, { useRef, useState } from "react";
 
-import { Category } from "../TopicCard";
-import ChevronIcon from "./ChevronIcon";
-import SubtopicLink from "./SubtopicLink";
+import { Category } from "../Card/Card";
+import ChevronIcon from "./components/ChevronIcon";
+import SubtopicLink from "../SubtopicLink/SubtopicLink";
 
 interface CategoryAccordionProps {
-  category: Category;
+  title: string;
+  children: React.ReactNode;
 }
 
-const CategoryAccordion: React.FC<CategoryAccordionProps> = ({ category }) => {
+const CategoryAccordion: React.FC<CategoryAccordionProps> = ({
+  title,
+  children,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [contentHeight, setContentHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -32,7 +38,7 @@ const CategoryAccordion: React.FC<CategoryAccordionProps> = ({ category }) => {
         aria-expanded={isExpanded}
         type="button"
       >
-        <span className="fw-medium text-body">{category.name}</span>
+        <span className="fw-medium text-body">{title}</span>
         <ChevronIcon isExpanded={isExpanded} />
       </button>
       <div
@@ -41,9 +47,7 @@ const CategoryAccordion: React.FC<CategoryAccordionProps> = ({ category }) => {
         style={{ height: contentHeight }}
       >
         <div className="border-bottom" />
-        {category.subtopics.map((subtopic, index) => (
-          <SubtopicLink key={index} name={subtopic.name} url={subtopic.url} />
-        ))}
+        {children}
       </div>
     </div>
   );

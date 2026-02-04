@@ -4,8 +4,8 @@ interface PageProps {
   children: ReactNode;
 }
 
-function Page({ children }: PageProps) {
+const Page: React.FC<PageProps> = ({ children }) => {
   return <div className="container py-5 px-lg-5">{children}</div>;
-}
+};
 
 export default Page;

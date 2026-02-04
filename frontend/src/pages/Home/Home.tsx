@@ -11,7 +11,7 @@ const courses = [
   { id: "p2-gcse-edexcel-h-t", name: "GCSE Physics - Edexcel Higher Triple" },
 ];
 
-const Home = () => {
+const Home: React.FC = () => {
   return (
     <Page>
       <PageTitle title="Courses available in this demo" />

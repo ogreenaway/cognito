@@ -1,5 +1,3 @@
-import React from "react";
-
 const Separator = () => (
   <svg
     width="6"

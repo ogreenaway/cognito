@@ -1,16 +1,17 @@
 import "./CoursePage.scss";
 
-import TopicCard, { Category } from "../../components/TopicCard/TopicCard";
+import Card, { Category } from "../../components/Card/Card";
 
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 import CardGrid from "../../components/CardGrid/CardGrid";
-import CategoryAccordion from "../../components/TopicCard/components/CategoryAccordion";
+import CategoryAccordion from "../../components/CategoryAccordion/CategoryAccordion";
 import ExamCode from "../../components/ExamCode/ExamCode";
 import HR from "../../components/HR/HR";
 import Page from "../../components/Page/Page";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import React from "react";
 import Spinner from "react-bootstrap/Spinner";
+import SubtopicLink from "../../components/SubtopicLink/SubtopicLink";
 import { useCourseData } from "../../hooks/useCourseData";
 import { useCourseID } from "../../hooks/useCourseID";
 
@@ -76,7 +77,18 @@ const sampleCategories2: Category[] = [
   },
 ];
 
-function CoursePage() {
+const mockData = [
+  {
+    title: "Organisation",
+    categories: sampleCategories,
+  },
+  {
+    title: "Cell Biology",
+    categories: sampleCategories2,
+  },
+];
+
+const CoursePage: React.FC = () => {
   const courseId = useCourseID();
   const { course, loading, error } = useCourseData(courseId);
 
@@ -113,19 +125,25 @@ function CoursePage() {
       <ExamCode code={course.code} />
       <HR />
       <CardGrid>
-        <TopicCard title="Organisation">
-          {sampleCategories.map((category, index) => (
-            <CategoryAccordion key={index} category={category} />
-          ))}
-        </TopicCard>
-        <TopicCard title="Cell Biology">
-          {sampleCategories2.map((category, index) => (
-            <CategoryAccordion key={index} category={category} />
-          ))}
-        </TopicCard>
+        {/* TODO: have an ID for each loop */}
+        {mockData.map((topic) => (
+          <Card key={topic.title} title={topic.title}>
+            {topic.categories.map((category) => (
+              <CategoryAccordion key={category.name} title={category.name}>
+                {category.subtopics.map((subtopic, index) => (
+                  <SubtopicLink
+                    key={index}
+                    name={subtopic.name}
+                    url={subtopic.url}
+                  />
+                ))}
+              </CategoryAccordion>
+            ))}
+          </Card>
+        ))}
       </CardGrid>
     </Page>
   );
-}
+};
 
 export default CoursePage;

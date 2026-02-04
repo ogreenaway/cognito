@@ -1,5 +1,3 @@
-import "./TopicCard.scss";
-
 import React from "react";
 
 // TODO: move
@@ -13,12 +11,12 @@ export interface Category {
   subtopics: Subtopic[];
 }
 
-interface TopicCardProps {
+interface CardProps {
   title: string;
   children: React.ReactNode;
 }
 
-const TopicCard: React.FC<TopicCardProps> = ({ title, children }) => {
+const Card: React.FC<CardProps> = ({ title, children }) => {
   return (
     <div className="bg-white border rounded">
       <div className="py-4 px-3 border-bottom">
@@ -29,4 +27,4 @@ const TopicCard: React.FC<TopicCardProps> = ({ title, children }) => {
   );
 };
 
-export default TopicCard;
+export default Card;
