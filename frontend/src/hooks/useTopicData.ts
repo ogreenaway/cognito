@@ -5,7 +5,6 @@ import { ApolloClient } from "@apollo/client";
 import { SUBTOPIC_QUERY } from "../api/subtopicQuery";
 import type { SubtopicsAPIResponse } from "../types/subtopic";
 import { TOPIC_QUERY } from "../api/topicQuery";
-import type { TopicsWithSubtopics } from "../types/topic";
 import createCategories from "../api/createCategories";
 import { useApolloClient } from "@apollo/client/react";
 
@@ -29,14 +28,14 @@ interface getTopicDataProps {
   client: ApolloClient;
   courseId: string;
   setTopics: (topics: TopicType[]) => void;
-  setLoading: (loading: boolean) => void;
+  setLoadingState: (loadingState: string | undefined) => void;
 }
 
 async function getTopicData({
   client,
   courseId,
   setTopics,
-  setLoading,
+  setLoadingState,
 }: getTopicDataProps) {
   // Fetch all topics for the course
   const topicsResult = await client
@@ -79,16 +78,22 @@ async function getTopicData({
     }
   );
 
-  const topicsWithCategories = await createCategories(topicsWithSubtopics);
+  setLoadingState(`Created 0 of ${topicsWithSubtopics.length} categories`);
+  const topicsWithCategories = await createCategories(
+    topicsWithSubtopics,
+    setLoadingState
+  );
 
   setTopics(topicsWithCategories);
-  setLoading(false);
+  setLoadingState(undefined);
 }
 
 export function useTopicData(courseId: string) {
   const client = useApolloClient();
   const [topicsWithCategories, setTopics] = useState<TopicType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingState, setLoadingState] = useState<string | undefined>(
+    "Gathering topics"
+  );
 
   useEffect(() => {
     if (courseId) {
@@ -97,10 +102,10 @@ export function useTopicData(courseId: string) {
         client,
         courseId,
         setTopics,
-        setLoading,
+        setLoadingState,
       });
     }
   }, [courseId, client, setTopics]);
 
-  return { topicsWithCategories, loading };
+  return { topicsWithCategories, loadingState };
 }

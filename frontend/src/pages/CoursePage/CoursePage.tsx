@@ -9,7 +9,6 @@ import HR from "../../components/HR/HR";
 import Page from "../../components/Page/Page";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import React from "react";
-import Spinner from "react-bootstrap/Spinner";
 import SubtopicLink from "../../components/SubtopicLink/SubtopicLink";
 import { useCourseData } from "../../hooks/useCourseData";
 import { useCourseID } from "../../hooks/useCourseID";
@@ -18,16 +17,14 @@ import { useTopicData } from "../../hooks/useTopicData";
 const CoursePage: React.FC = () => {
   const courseId = useCourseID();
   const { course, loading: courseLoading, error } = useCourseData(courseId);
-  const { topicsWithCategories, loading: topicsLoading } =
+  const { topicsWithCategories, loadingState: topicsLoadingState } =
     useTopicData(courseId);
 
-  if (courseLoading || topicsLoading) {
+  if (courseLoading || topicsLoadingState) {
     return (
       <Page>
         <div className="d-flex justify-content-center align-items-center py-5">
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
+          {topicsLoadingState || "Loading..."}
         </div>
       </Page>
     );

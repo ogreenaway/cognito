@@ -27,7 +27,7 @@ Run the tests using `npm test`
 - Reusable components. Card, page title
 - Few API calls at possible. Small as possible
 - Typescript. Generate API types
-- AI generated categories
+- AI generated categories. AI can be very slow and so I prioritised speed. I made the API calls in parallel and reduced the response size as much as possible. I wanted to send the topic titles so that the generated categories wouldn't clash with the title
 - Open spec
 
 # If had more time and was building this for production I would:

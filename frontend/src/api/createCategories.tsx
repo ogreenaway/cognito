@@ -8,7 +8,6 @@ const topicSchema = {
     type: "object",
     properties: {
       code: { type: "string" },
-      name: { type: "string" },
       categories: {
         type: "array",
         items: {
@@ -21,9 +20,8 @@ const topicSchema = {
                 type: "object",
                 properties: {
                   code: { type: "string" },
-                  name: { type: "string" },
                 },
-                required: ["code", "name"],
+                required: ["code"],
                 additionalProperties: false,
               },
             },
@@ -33,17 +31,23 @@ const topicSchema = {
         },
       },
     },
-    required: ["code", "name", "categories"],
+    required: ["code", "categories"],
     additionalProperties: false,
   },
   strict: true,
 } as const;
 
-const createCategories = async (topicsWithSubtopics: TopicsWithSubtopics[]) => {
+const createCategories = async (
+  topicsWithSubtopics: TopicsWithSubtopics[],
+  setLoadingState: (loadingState: string) => void
+) => {
   const client = new OpenAI({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY,
     dangerouslyAllowBrowser: true,
   });
+
+  const totalTopics = topicsWithSubtopics.length;
+  let resolvedCount = 0;
 
   const topicPromises = topicsWithSubtopics.map(
     async ({ topic, subtopics }) => {
@@ -64,12 +68,66 @@ const createCategories = async (topicsWithSubtopics: TopicsWithSubtopics[]) => {
         },
       });
 
+      resolvedCount++;
+      setLoadingState(`Created ${resolvedCount} of ${totalTopics} categories`);
+
       return JSON.parse(response.output_text);
     }
   );
 
   try {
-    const topics = await Promise.all(topicPromises);
+    type SimplifiedSubtopic = {
+      code: string;
+      name: string;
+    };
+    type SimplifiedCategory = {
+      name: string;
+      subtopics: SimplifiedSubtopic[];
+    };
+    type SimplifiedTopic = {
+      code: string;
+      name: string;
+      categories: SimplifiedCategory[];
+    };
+
+    const simplifiedTopics: SimplifiedTopic[] = await Promise.all(
+      topicPromises
+    );
+
+    console.log("simplifiedTopics:", simplifiedTopics);
+
+    const allSubtopicNames = topicsWithSubtopics.flatMap(
+      ({ subtopics }) => subtopics
+    );
+
+    console.log("allSubtopicNames:", allSubtopicNames);
+    const topics = simplifiedTopics.map(({ code, categories }) => {
+      const topicName = topicsWithSubtopics.find(
+        ({ topic }) => topic.code === code
+      )?.topic.name;
+      if (!topicName) {
+        throw new Error(`Topic name not found for code: ${code}`);
+      }
+      return {
+        code,
+        name: topicName,
+        categories: categories.map(({ name, subtopics }) => ({
+          name,
+          subtopics: subtopics.map(({ code }) => {
+            const subtopicName = allSubtopicNames.find(
+              (subtopic) => subtopic.code === code
+            )?.name;
+            if (!subtopicName) {
+              throw new Error(`Subtopic name not found for code: ${code}`);
+            }
+            return {
+              code,
+              name: subtopicName,
+            };
+          }),
+        })),
+      };
+    });
     return topics;
   } catch (error) {
     throw new Error(
