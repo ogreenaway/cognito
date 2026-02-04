@@ -6,7 +6,7 @@ interface CardGridProps {
 
 const CardGrid: React.FC<CardGridProps> = ({ children }) => {
   return (
-    <div className="row gy-4 my-5">
+    <div className="row gy-4 my-4">
       {React.Children.map(children, (child) => (
         <div className="col-md-6">{child}</div>
       ))}

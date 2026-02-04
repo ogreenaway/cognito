@@ -1,3 +1,5 @@
+import "./ExamCode.scss";
+
 import React from "react";
 
 interface ExamCodeProps {
@@ -6,7 +8,7 @@ interface ExamCodeProps {
 
 const ExamCode: React.FC<ExamCodeProps> = ({ code }) => {
   return (
-    <p className="d-inline-block p-2 mb-3 border rounded bg-body-secondary text-secondary">
+    <p className="exam-code d-inline-block border rounded bg-body m-0">
       <strong className="text-body">Exam code:</strong> {code}
     </p>
   );

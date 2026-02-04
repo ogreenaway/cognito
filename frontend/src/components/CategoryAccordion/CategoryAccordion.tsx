@@ -36,7 +36,7 @@ const CategoryAccordion: React.FC<CategoryAccordionProps> = ({
         aria-expanded={isExpanded}
         type="button"
       >
-        <span className="fw-medium text-body">{title}</span>
+        <span className="fw-bold category-accordion__button-text">{title}</span>
         <ChevronIcon isExpanded={isExpanded} />
       </button>
       <div

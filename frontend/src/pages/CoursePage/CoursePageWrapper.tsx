@@ -7,7 +7,6 @@ import CoursePage from "./components/CoursePage";
 import CoursePageCreateCategories from "./components/CoursePageCreateCategories";
 import Page from "../../components/Page/Page";
 import React from "react";
-import { TopicType } from "../../hooks/useTopicData";
 import { useCourseCode } from "../../hooks/useCourseCode";
 import { useCourseData } from "../../hooks/useCourseData";
 

@@ -92,8 +92,10 @@
 
   // Diagonal separator color (custom variable)
   &__spacer {
+    font-size: 1rem;
     color: var(--color-spacer);
     margin-inline: 0.5rem;
+    width: 1em;
   }
 
   &__current {

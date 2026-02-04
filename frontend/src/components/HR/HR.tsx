@@ -1,8 +1,9 @@
+import "./HR.scss";
+
 import React from "react";
 
 function HR() {
-  // TODO: use HR
-  return <div className="border-bottom" />;
+  return <hr className="hr mt-5 mb-0" />;
 }
 
 export default HR;

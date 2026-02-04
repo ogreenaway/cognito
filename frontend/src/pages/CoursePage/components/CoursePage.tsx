@@ -25,6 +25,7 @@ const CoursePage: React.FC<CoursePageProps> = ({
 }) => {
   const examBoardCode = course.examBoardCode.toUpperCase();
   const levelCode = course.levelCode.toUpperCase();
+
   return (
     <Page>
       <Breadcrumbs
@@ -39,21 +40,24 @@ const CoursePage: React.FC<CoursePageProps> = ({
       <ExamCode code={course.code} />
       <HR />
       <CardGrid>
-        {topicsWithCategories.map((topic) => (
-          <Card key={topic.code} title={topic.name}>
-            {topic.categories.map((category) => (
-              <CategoryAccordion key={category.name} title={category.name}>
-                {category.subtopics.map((subtopic) => (
-                  <SubtopicLink
-                    key={subtopic.code}
-                    name={subtopic.name}
-                    code={subtopic.code}
-                  />
-                ))}
-              </CategoryAccordion>
-            ))}
-          </Card>
-        ))}
+        {topicsWithCategories.map((topic) => {
+          const topicName = topic.name.split("- ")[1] || topic.name;
+          return (
+            <Card key={topic.code} title={topicName}>
+              {topic.categories.map((category) => (
+                <CategoryAccordion key={category.name} title={category.name}>
+                  {category.subtopics.map((subtopic) => (
+                    <SubtopicLink
+                      key={subtopic.code}
+                      name={subtopic.name}
+                      code={subtopic.code}
+                    />
+                  ))}
+                </CategoryAccordion>
+              ))}
+            </Card>
+          );
+        })}
       </CardGrid>
     </Page>
   );
