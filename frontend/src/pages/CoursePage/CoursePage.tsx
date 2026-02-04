@@ -1,8 +1,7 @@
 import "./CoursePage.scss";
 
-import Card, { Category } from "../../components/Card/Card";
-
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import Card from "../../components/Card/Card";
 import CardGrid from "../../components/CardGrid/CardGrid";
 import CategoryAccordion from "../../components/CategoryAccordion/CategoryAccordion";
 import ExamCode from "../../components/ExamCode/ExamCode";
@@ -16,7 +15,7 @@ import { useCourseData } from "../../hooks/useCourseData";
 import { useCourseID } from "../../hooks/useCourseID";
 
 // Static sample data matching the design reference
-const sampleCategories: Category[] = [
+const sampleCategories = [
   {
     name: "Organisation: Digestion",
     subtopics: [
@@ -58,7 +57,7 @@ const sampleCategories: Category[] = [
   },
 ];
 
-const sampleCategories2: Category[] = [
+const sampleCategories2 = [
   {
     name: "Cell Biology: Structure",
     subtopics: [
@@ -134,7 +133,8 @@ const CoursePage: React.FC = () => {
                   <SubtopicLink
                     key={index}
                     name={subtopic.name}
-                    url={subtopic.url}
+                    // TODO: switch to code
+                    code={subtopic.url}
                   />
                 ))}
               </CategoryAccordion>

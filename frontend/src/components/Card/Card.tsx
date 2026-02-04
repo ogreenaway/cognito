@@ -1,15 +1,11 @@
 import React from "react";
 
 // TODO: move
-export interface Subtopic {
-  name: string;
-  url: string;
-}
 
-export interface Category {
-  name: string;
-  subtopics: Subtopic[];
-}
+// export interface Category {
+//   name: string;
+//   subtopics: Subtopic[];
+// }
 
 interface CardProps {
   title: string;

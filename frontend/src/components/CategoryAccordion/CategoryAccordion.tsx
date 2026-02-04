@@ -2,9 +2,7 @@ import "./CategoryAccordion.scss";
 
 import React, { useRef, useState } from "react";
 
-import { Category } from "../Card/Card";
 import ChevronIcon from "./components/ChevronIcon";
-import SubtopicLink from "../SubtopicLink/SubtopicLink";
 
 interface CategoryAccordionProps {
   title: string;
