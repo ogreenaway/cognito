@@ -11,9 +11,7 @@ const createTestClient = () =>
     cache: new InMemoryCache(),
   });
 
-export function renderApp(
-  path = "/courseoverview/p2-gcse-edexcel-h-t/lessons"
-) {
+export function renderApp(path: string) {
   const client = createTestClient();
 
   return render(

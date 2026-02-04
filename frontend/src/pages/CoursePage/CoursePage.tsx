@@ -77,7 +77,7 @@ const sampleCategories2: Category[] = [
 
 function CoursePage() {
   const courseId = useCourseID();
-  const { course, loading, error } = useCourseData(courseId || "");
+  const { course, loading, error } = useCourseData(courseId);
 
   if (loading) {
     return (
@@ -108,7 +108,7 @@ function CoursePage() {
         examBoard={course.examBoardCode}
         level={course.levelCode}
       />
-      <PageTitle name={course.name} />
+      <PageTitle title={course.name} subtitle="Revision Notes" />
       <ExamCode code={course.code} />
       <HR />
       <TopicCardGrid>

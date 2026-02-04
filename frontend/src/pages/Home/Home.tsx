@@ -1,4 +1,6 @@
 import { Link } from "react-router";
+import Page from "../../components/Page/Page";
+import PageTitle from "../../components/PageTitle/PageTitle";
 
 const courses = [
   { id: "b2-gcse-aqa-h-t", name: "GCSE Biology - AQA Higher Triple" },
@@ -11,8 +13,8 @@ const courses = [
 
 const Home = () => {
   return (
-    <div className="container py-5">
-      <h1 className="mb-4">Courses available in this demo</h1>
+    <Page>
+      <PageTitle title="Courses available in this demo" />
       <ul className="list-unstyled">
         {courses.map((course) => (
           <li key={course.id} className="mb-2">
@@ -22,7 +24,7 @@ const Home = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </Page>
   );
 };
 
