@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 
-import CoursePage from "./CoursePage/CoursePage";
+import CoursePageWrapper from "./CoursePage/CoursePageWrapper";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import Home from "./Home/Home";
 import PageNotFound from "./PageNotFound/PageNotFound";
@@ -11,7 +11,7 @@ const AppRoutes = () => (
       path="/courseoverview/:courseId/lessons"
       element={
         <ErrorBoundary>
-          <CoursePage />
+          <CoursePageWrapper />
         </ErrorBoundary>
       }
     />

@@ -8,6 +8,7 @@ import { TOPIC_QUERY } from "../api/topicQuery";
 import createCategories from "../api/createCategories/createCategories";
 import { useApolloClient } from "@apollo/client/react";
 
+// TODO: move to types and clean up types
 type SubtopicType = {
   code: string;
   name: string;
@@ -18,7 +19,7 @@ type CategoryType = {
   subtopics: SubtopicType[];
 };
 
-type TopicType = {
+export type TopicType = {
   code: string;
   name: string;
   categories: CategoryType[];
