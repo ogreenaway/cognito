@@ -83,3 +83,5 @@ If I had more time, I would add pageview and interaction tracking. I would also 
 In the real world, I would work with a backend engineer to create a system to generate TypeScript types for an endpoint based on their documentation. For this project, I just wrote the type myself.
 
 # Screenshots
+
+![Course Page](documentation/screenshots/Main%20Screenshot.png)
