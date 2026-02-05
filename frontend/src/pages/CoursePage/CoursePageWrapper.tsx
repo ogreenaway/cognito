@@ -3,7 +3,8 @@ import {
   getCachedVersion,
 } from "../../utils/localStorage";
 
-import CoursePage from "./components/CoursePage";
+import CourseContent from "./components/CourseContent";
+import CourseHeader from "./components/CourseHeader";
 import CoursePageCreateCategories from "./components/CoursePageCreateCategories";
 import Page from "../../components/Page/Page";
 import React from "react";
@@ -37,7 +38,18 @@ const CoursePageWrapper: React.FC = () => {
     cachedCategories.length > 0
   ) {
     return (
-      <CoursePage course={course} topicsWithCategories={cachedCategories} />
+      <Page>
+        <CourseHeader
+          subjectName={course.subjectName}
+          examBoardCode={course.examBoardCode.toUpperCase()}
+          levelCode={course.levelCode.toUpperCase()}
+          courseCode={course.code}
+        />
+        <CourseContent
+          courseCode={course.code}
+          topicsWithCategories={cachedCategories}
+        />
+      </Page>
     );
   }
 

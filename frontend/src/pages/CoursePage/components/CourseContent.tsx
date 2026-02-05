@@ -1,45 +1,25 @@
 import "./CoursePage.scss";
 
-import Breadcrumbs from "../../../components/Breadcrumbs/Breadcrumbs";
 import Card from "../../../components/Card/Card";
 import CardGrid from "../../../components/CardGrid/CardGrid";
 import CategoryAccordion from "../../../components/CategoryAccordion/CategoryAccordion";
-import { Course } from "../../../types/course";
 import CourseNotes from "../../../components/CourseNotes/CourseNotes";
-import ExamCode from "../../../components/ExamCode/ExamCode";
 import FavouriteButton from "../../../components/FavouriteButton/FavouriteButton";
-import HR from "../../../components/HR/HR";
-import Page from "../../../components/Page/Page";
-import PageTitle from "../../../components/PageTitle/PageTitle";
 import React from "react";
 import SubtopicLink from "../../../components/SubtopicLink/SubtopicLink";
 import { Topic } from "../../../types/topic";
 
-interface CoursePageProps {
-  course: Course;
+interface CourseContentProps {
+  courseCode: string;
   topicsWithCategories: Topic[];
 }
 
-const CoursePage: React.FC<CoursePageProps> = ({
-  course,
+const CourseContent: React.FC<CourseContentProps> = ({
+  courseCode,
   topicsWithCategories,
 }) => {
-  const examBoardCode = course.examBoardCode.toUpperCase();
-  const levelCode = course.levelCode.toUpperCase();
-
   return (
-    <Page>
-      <Breadcrumbs
-        subject={course.subjectName}
-        examBoard={examBoardCode}
-        level={levelCode}
-      />
-      <PageTitle
-        title={`${examBoardCode} ${levelCode} ${course.subjectName}`}
-        subtitle="Revision Notes"
-      />
-      <ExamCode code={course.code} />
-      <HR />
+    <>
       <CardGrid>
         {topicsWithCategories.map((topic) => {
           const topicName = topic.name.split("- ")[1] || topic.name;
@@ -53,7 +33,7 @@ const CoursePage: React.FC<CoursePageProps> = ({
                       className="subtopic-row d-flex align-items-center px-3"
                     >
                       <FavouriteButton
-                        courseCode={course.code}
+                        courseCode={courseCode}
                         subtopicCode={subtopic.code}
                       />
                       <SubtopicLink name={subtopic.name} code={subtopic.code} />
@@ -65,11 +45,9 @@ const CoursePage: React.FC<CoursePageProps> = ({
           );
         })}
       </CardGrid>
-      <CourseNotes courseCode={course.code} />
-    </Page>
+      <CourseNotes courseCode={courseCode} />
+    </>
   );
 };
 
-export default CoursePage;
-
-// TODO:Split into CourseHeader and CourseContent components
+export default CourseContent;

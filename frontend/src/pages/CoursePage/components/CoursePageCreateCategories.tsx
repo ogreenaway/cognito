@@ -1,5 +1,6 @@
 import { Course } from "../../../types/course";
-import CoursePage from "./CoursePage";
+import CourseContent from "./CourseContent";
+import CourseHeader from "./CourseHeader";
 import Page from "../../../components/Page/Page";
 import React from "react";
 import { useTopicData } from "../../../hooks/useTopicData";
@@ -17,7 +18,13 @@ const CoursePageCreateCategories: React.FC<CoursePageCreateCategoriesProps> = ({
   if (topicsLoadingState) {
     return (
       <Page>
-        <div className="d-flex justify-content-center align-items-center py-5">
+        <CourseHeader
+          subjectName={course.subjectName}
+          examBoardCode={course.examBoardCode.toUpperCase()}
+          levelCode={course.levelCode.toUpperCase()}
+          courseCode={course.code}
+        />
+        <div className="alert alert-info mt-5 text-center" role="alert">
           {topicsLoadingState || "Loading..."}
         </div>
       </Page>
@@ -27,6 +34,12 @@ const CoursePageCreateCategories: React.FC<CoursePageCreateCategoriesProps> = ({
   if (!topicsWithCategories) {
     return (
       <Page>
+        <CourseHeader
+          subjectName={course.subjectName}
+          examBoardCode={course.examBoardCode.toUpperCase()}
+          levelCode={course.levelCode.toUpperCase()}
+          courseCode={course.code}
+        />
         <div className="alert alert-danger" role="alert">
           Failed to load course data. Please try again later.
         </div>
@@ -35,7 +48,18 @@ const CoursePageCreateCategories: React.FC<CoursePageCreateCategoriesProps> = ({
   }
 
   return (
-    <CoursePage course={course} topicsWithCategories={topicsWithCategories} />
+    <Page>
+      <CourseHeader
+        subjectName={course.subjectName}
+        examBoardCode={course.examBoardCode.toUpperCase()}
+        levelCode={course.levelCode.toUpperCase()}
+        courseCode={course.code}
+      />
+      <CourseContent
+        courseCode={course.code}
+        topicsWithCategories={topicsWithCategories}
+      />
+    </Page>
   );
 };
 
