@@ -33,3 +33,5 @@ Run the tests using `npm test`
 # If had more time and was building this for production I would:
 
 - Create React App: Migrate to Vite
+
+notesEndpointError

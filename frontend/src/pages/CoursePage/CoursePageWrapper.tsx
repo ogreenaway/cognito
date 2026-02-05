@@ -15,13 +15,7 @@ const CoursePageWrapper: React.FC = () => {
   const { course, loading: courseLoading, error } = useCourseData(courseCode);
 
   if (courseLoading) {
-    return (
-      <Page>
-        <div className="d-flex justify-content-center align-items-center py-5">
-          "Loading..."
-        </div>
-      </Page>
-    );
+    return null;
   }
 
   if (error || !course) {

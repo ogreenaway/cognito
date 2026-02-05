@@ -5,6 +5,7 @@ import Card from "../../../components/Card/Card";
 import CardGrid from "../../../components/CardGrid/CardGrid";
 import CategoryAccordion from "../../../components/CategoryAccordion/CategoryAccordion";
 import { Course } from "../../../types/course";
+import CourseNotes from "../../../components/CourseNotes/CourseNotes";
 import ExamCode from "../../../components/ExamCode/ExamCode";
 import FavouriteButton from "../../../components/FavouriteButton/FavouriteButton";
 import HR from "../../../components/HR/HR";
@@ -64,6 +65,7 @@ const CoursePage: React.FC<CoursePageProps> = ({
           );
         })}
       </CardGrid>
+      <CourseNotes courseCode={course.code} />
     </Page>
   );
 };

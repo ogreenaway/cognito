@@ -4,11 +4,11 @@ Students need a place to capture personal notes while studying a course. Having 
 
 ## What Changes
 
-- Add a notes text area section on the CoursePage for students to write personal notes
+- Add a notes text area section at the bottom of the CoursePage for students to write personal notes
 - Implement auto-save as the user types (debounced, not a manual save button)
 - Display a visible status indicator showing saving/saved/error states
-- Persist notes in localStorage with optimistic UI updates
-- Create simulated backend synchronization with error handling
+- Persist notes in localStorage using the existing helper functions (`getLocalStorage`/`setLocalStorage`) with new `getNotes` and `setNotes` wrapper functions
+- Create simulated backend synchronization similar to `api/favourites.ts` with a `notesEndpointError=true` query param to fake API errors for testing
 - Handle edge cases like save failures while the user continues typing
 
 ## Capabilities
@@ -18,8 +18,6 @@ Students need a place to capture personal notes while studying a course. Having 
 - `course-notes`: Managing course-level notes including the notes text area component, auto-save with debounce, status indicator, localStorage persistence, backend sync simulation, and error handling
 
 ### Modified Capabilities
-
-<!-- No existing specs require requirement changes -->
 
 ## Impact
 
@@ -33,10 +31,14 @@ Students need a place to capture personal notes while studying a course. Having 
 
 **New Files:**
 
-- `api/notes.ts` - simulated backend sync (similar to `api/favourites.ts`)
-- `utils/localStorage.ts` - new notes utility functions (get/set by course code)
+- `api/notes.ts` - simulated backend sync (similar to `api/favourites.ts`) with `notesEndpointError` query param
+
+**Modified Files:**
+
+- `utils/localStorage.ts` - add `notes_${courseCode}` key type and `getNotes`/`setNotes` wrapper functions
 
 **Dependencies:**
 
 - No new external dependencies required
 - Uses existing React hooks and localStorage APIs
+

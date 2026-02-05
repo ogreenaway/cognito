@@ -1,0 +1,23 @@
+.course-notes {
+  &__status {
+    &--saving {
+      color: #6c757d;
+    }
+
+    &--saved {
+      color: #198754;
+    }
+
+    &--error {
+      color: #dc3545;
+    }
+  }
+
+  &__textarea {
+    width: 100%;
+    min-height: 150px;
+    resize: vertical;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}

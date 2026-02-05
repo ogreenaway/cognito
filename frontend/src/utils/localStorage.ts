@@ -3,7 +3,8 @@ import { Topic } from "../types/topic";
 type LocalStorageKey =
   | `course_version_${string}`
   | `course_categories_${string}`
-  | `favourites_${string}`;
+  | `favourites_${string}`
+  | `notes_${string}`;
 
 const getLocalStorage = <T>(key: LocalStorageKey): T | null => {
   // TODO: set these to expire
@@ -95,4 +96,13 @@ export const toggleFavourite = (
     setFavourites(courseCode, newFavourites);
     return { success: true, isFavourite: true, favourites: newFavourites };
   }
+};
+
+// Notes utilities
+export const getNotes = (courseCode: string): string | null => {
+  return getLocalStorage<string>(`notes_${courseCode}`);
+};
+
+export const setNotes = (courseCode: string, notes: string): void => {
+  setLocalStorage<string>(`notes_${courseCode}`, notes);
 };
