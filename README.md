@@ -4,7 +4,7 @@ Here's [a Loom I've recorded on how I use AI.](https://www.loom.com/share/6dab49
 
 # How to run locally
 
-In the root folder, create an `.env` file with your API key:
+In the frontend folder, create an `.env` file with your API key:
 
 `REACT_APP_OPENAI_API_KEY=[OPEN AI API KEY]`
 
