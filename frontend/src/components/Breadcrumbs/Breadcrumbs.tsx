@@ -1,6 +1,7 @@
 import "./Breadcrumbs.scss";
 
 import HomeIcon from "./components/HomeIcon";
+import { Link } from "react-router";
 import React from "react";
 import Separator from "./components/Separator";
 
@@ -29,9 +30,13 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     <div className="breadcrumbs mb-4" data-testid="breadcrumbs">
       <div className="breadcrumbs__scroll-wrapper justify-content-start">
         <span className="breadcrumbs__crumb">
-          <a className="breadcrumbs__parent text-decoration-underline" href="/">
+          <Link
+            className="breadcrumbs__parent text-decoration-underline"
+            data-testid="home-link"
+            to="/"
+          >
             <HomeIcon />
-          </a>
+          </Link>
           <Separator />
         </span>
         <span className="breadcrumbs__crumb">
