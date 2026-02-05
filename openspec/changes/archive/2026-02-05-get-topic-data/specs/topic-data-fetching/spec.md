@@ -110,3 +110,4 @@ The `CoursePage` component SHALL call the `useTopicData` hook with the course ID
 
 - **WHEN** `CoursePage` renders
 - **THEN** it calls `useTopicData(courseId)` where `courseId` comes from `useCourseID()`
+

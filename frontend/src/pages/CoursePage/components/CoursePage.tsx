@@ -50,7 +50,7 @@ const CoursePage: React.FC<CoursePageProps> = ({
                   {category.subtopics.map((subtopic) => (
                     <div
                       key={subtopic.code}
-                      className="subtopic-row d-flex align-items-center"
+                      className="subtopic-row d-flex align-items-center px-3"
                     >
                       <FavouriteButton
                         courseCode={course.code}
