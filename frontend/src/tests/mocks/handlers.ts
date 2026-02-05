@@ -2,6 +2,7 @@ import { graphql } from "msw";
 import { mockCourseResponse } from "./mockCourse";
 import { mockSubtopicsResponse } from "./mockSubtopic";
 import { mockTopicsResponse } from "./mockTopic";
+import { openAIHandler } from "./mockOpenAI";
 
 export const handlers = [
   graphql.query("course", (req, res, ctx) => {
@@ -13,4 +14,5 @@ export const handlers = [
   graphql.query("courseSubtopics", (req, res, ctx) => {
     return res(ctx.data(mockSubtopicsResponse.data));
   }),
+  openAIHandler,
 ];
