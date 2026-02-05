@@ -87,7 +87,7 @@ const CourseNotes: React.FC<CourseNotesProps> = ({ courseCode }) => {
   return (
     <Card title="My Course Notes">
       <textarea
-        className="course-notes__textarea form-control"
+        className="mb-3 course-notes__textarea form-control"
         value={notes}
         onChange={handleChange}
         placeholder="Write your notes here..."
@@ -96,28 +96,12 @@ const CourseNotes: React.FC<CourseNotesProps> = ({ courseCode }) => {
       />
       {status !== "idle" && (
         <div
-          className={`py-2 course-notes__status course-notes__status--${status}`}
+          className={`pb-3 course-notes__status course-notes__status--${status}`}
         >
           {getStatusText()}
         </div>
       )}
     </Card>
-  );
-
-  return (
-    <div className="course-notes">
-      <div className="course-notes__header">
-        <h3 className="course-notes__title">Notes</h3>
-      </div>
-      <textarea
-        className="course-notes__textarea form-control"
-        value={notes}
-        onChange={handleChange}
-        placeholder="Write your notes here..."
-        rows={6}
-        aria-label="Course notes"
-      />
-    </div>
   );
 };
 

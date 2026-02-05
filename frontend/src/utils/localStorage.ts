@@ -7,8 +7,6 @@ type LocalStorageKey =
   | `notes_${string}`;
 
 const getLocalStorage = <T>(key: LocalStorageKey): T | null => {
-  // TODO: set these to expire
-  console.info("Getting localStorage key:", key);
   try {
     const item = localStorage.getItem(key);
     if (item === null) {
@@ -22,7 +20,6 @@ const getLocalStorage = <T>(key: LocalStorageKey): T | null => {
 };
 
 const setLocalStorage = <T>(key: LocalStorageKey, value: T): void => {
-  console.info("Setting localStorage key:", key, value);
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
